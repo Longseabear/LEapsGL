@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\Shaders">
+      <UniqueIdentifier>{8b229483-748c-4051-aa6f-184b773480b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Engine">
+      <UniqueIdentifier>{63e726d6-dd7c-4317-a7ee-f4db04e2d40b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Engine">
+      <UniqueIdentifier>{494be85a-e060-4204-aa42-423d633a475b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\textures">
+      <UniqueIdentifier>{e266b0d9-a2d2-48b7-a253-69609213f091}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainActivitiy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Tutorial_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HelloShaders.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HelloTexture.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LEapsGLEngine\src\ShaderManager.cpp">
+      <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LEapsGLEngine\src\stb_image.cpp">
+      <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LEapsGLEngine\src\Object.cpp">
+      <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LEapsGLEngine\src\Color.cpp">
+      <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LEapsGLEngine\src\Texture2D.cpp">
+      <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shaders\SimpleVertexShader.vert">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="resources\shaders\SimpleFragmentShader.frag">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="resources\shaders\HelloShader.frag">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="resources\shaders\HelloShader.vert">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="resources\shaders\HelloTexture.frag">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="resources\shaders\HelloTexture.vert">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\texture\container.jpg">
+      <Filter>리소스 파일\textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LEapsGLEngine\include\stb_image.h">
+      <Filter>헤더 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LEapsGLEngine\include\Texture2D.h">
+      <Filter>헤더 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LEapsGLEngine\include\Object.h">
+      <Filter>헤더 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LEapsGLEngine\include\ShaderManager.h">
+      <Filter>헤더 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LEapsGLEngine\include\Color.h">
+      <Filter>헤더 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LEapsGLEngine\include\FileSystemManager.h">
+      <Filter>헤더 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LEapsGLEngine\include\Material2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
