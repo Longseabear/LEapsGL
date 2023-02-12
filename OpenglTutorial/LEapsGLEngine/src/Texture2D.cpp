@@ -3,32 +3,10 @@
 #include <iostream>
 #include <filesystem>
 
-GLuint LEapsGL::GetTextureImageFormatFromPath(const string path) {
-	static std::map<string, GLuint> extToFormat = {
-		{"jpg", GL_RGB}, {"png", GL_RGBA}
-	};
-	std::string::size_type idx;
-	idx = path.rfind('.');
-
-	if (idx != std::string::npos)
-	{
-		std::string extension = path.substr(idx + 1);
-		auto iter = extToFormat.find(extension);
-		if (iter != extToFormat.end()) return iter->second;
-	}
-	std::cout << "Texture2D:: Format setting fail!!\n";
-	return 0;
-}
-//
-//LEapsGL::Texture2D LEapsGL::InitSimpleTexture(LEapsGL::Color color)
-//{
-//	auto texture = Texture2D();
-//	return Texture2D();
-//}
-
-LEapsGL::Texture2D::Texture2D(const char* path)
+LEapsGL::Texture2D::Texture2D(const Image img)
 {
-	Load(path);
+	this->img = img;
+	this->format = img.format.colorFormat;
 }
 
 void LEapsGL::Texture2D::Apply()
@@ -38,11 +16,12 @@ void LEapsGL::Texture2D::Apply()
 		glTexParameteri(GL_TEXTURE_2D, iter.first, iter.second);
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data.get());
+	// state name, mipmap level, gl texteure format, width, height, 0, image format, image data byte
+	glTexImage2D(GL_TEXTURE_2D, 0, format, img.width, img.height, 0, img.format.colorFormat, img.format.colorType, img.pixels.get());
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
 
-void LEapsGL::Texture2D::Load(const char* path)
+void LEapsGL::Texture2D::AllocateDefaultSetting()
 {
 	glGenTextures(1, &ID);
 
@@ -53,27 +32,18 @@ void LEapsGL::Texture2D::Load(const char* path)
 	// set texture filtering parameters
 	SetTextureParam(GL_TEXTURE_MIN_FILTER, GL_REPEAT);
 	SetTextureParam(GL_TEXTURE_MAG_FILTER, GL_REPEAT);
-
-	stbi_set_flip_vertically_on_load(true);
-	data = std::shared_ptr<Byte>(stbi_load(path, &width, &height, &nrChannels, 0),
-		stbi_image_free);
-	format = GetTextureImageFormatFromPath(path);
-
-	if (data == nullptr) {
-		std::cout << "failed to load texture\n";
-	}
 }
 
-void LEapsGL::Texture2D::MakeEmptyTexture(int width, int height, int nrChannel)
-{
-	int size = width * height * nrChannels;
-	this->width = width;
-	this->height = height;
-	this->nrChannels = nrChannel;
-
-	Byte* sample = new Byte[size];
-	data = std::shared_ptr<Byte>(sample, stbi_image_free);
-}
+//void LEapsGL::Texture2D::MakeEmptyTexture(int width, int height, int nrChannel)
+//{
+//	int size = width * height * nrChannels;
+//	this->width = width;
+//	this->height = height;
+//	this->nrChannels = nrChannel;
+//
+//	Byte* sample = new Byte[size];
+//	data = std::shared_ptr<Byte>(sample, stbi_image_free);
+//}
 
 void LEapsGL::Texture2D::use()
 {
@@ -95,4 +65,15 @@ void LEapsGL::Texture2D::setID(GLuint id)
 	ID = id;
 }
 
+LEapsGL::Texture2D LEapsGL::InitSimpleTexture(Color c)
+{
+	auto img = LEapsGL::Image::CreateImage<GLubyte>(1, 1, 3, LEapsGL::ImageFormat{ GL_RGB, GL_UNSIGNED_BYTE });
+	GLubyte* img_raws = static_cast<GLubyte*>(img.pixels.get());
+	img_raws[0] = GLubyte(c.r * 255);
+	img_raws[1] = GLubyte(c.g * 255);
+	img_raws[2] = GLubyte(c.b * 255);
+	return LEapsGL::Texture2D(img);;
+}
 
+const LEapsGL::Texture2D LEapsGL::Texture2D::blackTexture = LEapsGL::InitSimpleTexture(LEapsGL::Color::black);
+const LEapsGL::Texture2D LEapsGL::Texture2D::grayTexture = LEapsGL::InitSimpleTexture(LEapsGL::Color::gray);

@@ -138,6 +138,7 @@
     </ClCompile>
     <ClCompile Include="HelloTexture.cpp" />
     <ClCompile Include="LEapsGLEngine\src\Color.cpp" />
+    <ClCompile Include="LEapsGLEngine\src\Image.cpp" />
     <ClCompile Include="LEapsGLEngine\src\Object.cpp" />
     <ClCompile Include="LEapsGLEngine\src\ShaderManager.cpp" />
     <ClCompile Include="LEapsGLEngine\src\stb_image.cpp" />
@@ -161,6 +162,7 @@
     <Image Include="resources\texture\container.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LEapsGLEngine\include\Image.h" />
     <ClInclude Include="LEapsGLEngine\include\Material2D.h" />
     <ClInclude Include="LEapsGLEngine\include\Color.h" />
     <ClInclude Include="LEapsGLEngine\include\FileSystemManager.h" />

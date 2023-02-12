@@ -5,6 +5,7 @@
 #include <ShaderManager.h>
 #include <Color.h>
 #include <Texture2D.h>
+#include <Image.h>
 void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(window, true);
 }
@@ -95,7 +96,13 @@ int main() {
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 	
-	auto texture = LEapsGL::Texture2D("resources/textures/container.jpg");
+	auto texture = LEapsGL::Texture2D(LEapsGL::Image::LoadImage("resources/textures/container.jpg"));
+	//auto img = LEapsGL::Image::CreateImage<GLubyte>(100, 100, 3, LEapsGL::ImageFormat{GL_RGB, GL_UNSIGNED_BYTE});
+	//GLubyte* img_raws = static_cast<GLubyte*>(img.pixels.get());
+	//for (int i = 0; i < img.width; i++) img_raws[(i + 0 * img.width)*3] = 255;
+	//auto img = LEapsGL::Texture2D::grayTexture;
+	//auto texture = LEapsGL::Texture2D::grayTexture;
+	texture.AllocateDefaultSetting();
 	texture.Apply();
 
 	float deltaTime = 0;

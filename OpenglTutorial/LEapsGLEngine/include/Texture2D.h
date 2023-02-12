@@ -12,32 +12,24 @@
 #include <memory>
 
 #include <Color.h>
+#include <Image.h>
 #include "stb_image.h"
 using namespace std;
 
 using TextureFormat = GLenum;
-using Byte = unsigned char;
-using Pixel = unsigned int;
 
 namespace LEapsGL {
 	class Texture2D : Object {
 	public:
-		Texture2D() :ID(0), format(GL_RGB), mipmapCount(0), data(nullptr), height(0), width(0),nrChannels(0){};
-		Texture2D(const char* path);
+		Texture2D() :ID(0), format(GL_RGB), mipmapCount(0), img(){};
+		Texture2D(const Image img);
 		Texture2D(const Texture2D& rhs): Object(){
 			this->ID = rhs.ID;
 			format = rhs.format;
 			mipmapCount = mipmapCount;
-			data = rhs.data;
+			img = rhs.img;
 
-			int size = rhs.width * rhs.height * rhs.nrChannels;
-			Byte* copiedData = new Byte[size];
-			std::memcpy(copiedData, rhs.data.get(), size);
-			data = std::shared_ptr<Byte>(copiedData, stbi_image_free);
-			
-			width = rhs.width;
-			height = rhs.height;
-			nrChannels = rhs.nrChannels;
+			int size = rhs.img.totalByteSize;
 			textureParams = rhs.textureParams;
 		}
 		Texture2D(Texture2D&& rhs) noexcept : Texture2D(){
@@ -54,41 +46,37 @@ namespace LEapsGL {
 		}
 		friend void swap(Texture2D& lhs, Texture2D& rhs) {
 			using std::swap;
-			swap(lhs.data, rhs.data);
 			swap(lhs.format, rhs.format);
-			swap(lhs.height, rhs.height);
-			swap(lhs.width, rhs.height);
 			swap(lhs.ID, rhs.ID);
 			swap(lhs.mipmapCount, rhs.mipmapCount);
-			swap(lhs.nrChannels, rhs.nrChannels);
 			swap(lhs.textureParams, rhs.textureParams);
+			swap(lhs.img, rhs.img);
 		}
 
 		// upload current image texture buffer CPU to GPU
 		void Apply();
-		void Load(const char *);
+		void AllocateDefaultSetting();
 
-		void MakeEmptyTexture(int width, int height, int nrChannel);
+		//	void MakeEmptyTexture(int width, int height, int nrChannel);
 
 		void use();
 		void SetTextureParam(GLuint key, GLuint value);
 		GLuint getID();
 		void setID(GLuint id);
 
-		int width, height, nrChannels;
+		static const Texture2D blackTexture;
+		static const Texture2D grayTexture;
+
 	private:
 		GLuint ID;
 		GLuint mipmapCount;
-		TextureFormat format;
-		
-		std::shared_ptr<Byte> data;
 
+		Image img;		
+		TextureFormat format;
 		std::map<GLuint, GLuint> textureParams;
 
-		static const Texture2D blackTexture;
-		static const Texture2D grayTexture;
 	};
-	GLuint GetTextureImageFormatFromPath(const string path);
+
 	Texture2D InitSimpleTexture(Color);
 };
 

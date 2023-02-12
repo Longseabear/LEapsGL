@@ -57,6 +57,9 @@
     <ClCompile Include="LEapsGLEngine\src\Texture2D.cpp">
       <Filter>소스 파일\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="LEapsGLEngine\src\Image.cpp">
+      <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\SimpleVertexShader.vert">
@@ -104,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="LEapsGLEngine\include\Material2D.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LEapsGLEngine\include\Image.h">
+      <Filter>헤더 파일\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
